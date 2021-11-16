@@ -9,13 +9,14 @@
 		"solid-js",
 		"ssr"
 	],
+	"type": "commonjs",
 	"main": "index.js",
 	"scripts": {
 		"start": "cross-env NODE_ENV=production node ./dist/server/",
 		"dev": "vite",
 		"build": "concurrently --kill-others-on-fail -n w: \"pnpm:build:*\"",
 		"build:client": "vite build --outDir dist/client",
-		"build:server": "vite build --ssr src/server/index.sx --outDir dist/server"
+		"build:server": "vite build --ssr src/server/index.ts --outDir dist/server"
 	},
 	"dependencies": {
 		"compression": "^1.7.4",

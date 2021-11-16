@@ -1,11 +1,15 @@
 // file deepcode ignore Utf8Literal: Web uses utf-8
-import { readFileSync } from 'fs';
+import { readFileSync, existsSync } from 'fs';
 import * as path from 'path';
 import express from 'express';
 import assert from 'assert';
 import { render } from './renderer';
 import indexHtml from '../../index.html?raw';
-import users from '../../static/users.json';
+import { createServer as createViteServer } from 'vite';
+import compression from 'compression';
+import serveStatic from 'serve-static';
+//import users from '../../static/users.json';
+import users from './users';
 
 const isTest =
 	process.env['NODE_ENV'] === 'test' || !!process.env['VITE_TEST_BUILD'];
@@ -18,7 +22,7 @@ export default async function createServer(
 
 	const app = express().disable('x-powered-by');
 
-	const vite = await require('vite').createServer({
+	const vite = await createViteServer({
 		root,
 		logLevel: isTest ? 'error' : 'info',
 		server: {
@@ -30,9 +34,10 @@ export default async function createServer(
 		// use vite's connect instance as middleware
 		app.use(vite.middlewares);
 	} else {
-		app.use(require('compression'));
+		app.use(compression());
 		app.use(
-			require('serve-static')(resolve('dist/client'), {
+			// TODO: Try using WWW_ROOT First
+			serveStatic(resolve('../client'), {
 				index: false,
 				extensions: false,
 			}),

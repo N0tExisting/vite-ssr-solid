@@ -33,8 +33,11 @@ export default defineConfig({
 		preserveSymlinks: true, // Avoid errors with pnpm linking
 	},
 	ssr: {
-		// Vite attempts to load this as a Commonjs dependency
-		noExternal: ['solid-meta'],
+		noExternal: [
+			'vite',
+			// Vite attempts to load this as a Commonjs dependency
+			'solid-meta',
+		],
 	},
 	cacheDir: 'node_modules/.cache/vite',
 	assetsInclude: [/\/static\/.*$/],
