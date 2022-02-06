@@ -1,18 +1,11 @@
-import createServer from '.';
+import app from './index';
 
-const isTest =
-	process.env['NODE_ENV'] === 'test' || !!process.env['VITE_TEST_BUILD'];
-const PORT = process.env['PORT'] || '3000';
+const PORT = process.env['PORT'] || (import.meta.env.PORT as string) || '3000';
 
-if (!isTest) {
-	createServer()
-		.then(({ app }) =>
-			app.listen(PORT, () => {
-				console.log(`http://localhost:${PORT}`);
-			}),
-		)
-		.catch((err) => {
-			console.error('Error Starting Server:\n', err);
-			process.exit(1);
-		});
+if (require.main && require.main.filename === module.filename) {
+	app.listen(PORT, () => {
+		console.log(`http://localhost:${PORT}`);
+	});
 }
+
+export * from './index';

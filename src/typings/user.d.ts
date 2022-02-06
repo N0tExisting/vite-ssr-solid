@@ -29,5 +29,5 @@ export interface User {
 }
 
 export interface Users {
-	[key: string]: User;
+	[uuid: string]: User;
 }

@@ -1,44 +1,33 @@
+// @ts-check
+/// <reference path="./vite-config.d.ts" />
+import { builtinModules } from 'node:module';
 import { defineConfig } from 'vite';
+import tsconfigPaths from 'vite-tsconfig-paths';
 import solid from 'vite-plugin-solid';
-import { typescriptPaths } from 'rollup-plugin-typescript-paths';
-import { VitePluginNode } from 'vite-plugin-node';
+import Servers from './server/plugin.mjs';
 
 export default defineConfig({
-	plugins: [
-		{
-			...typescriptPaths(),
-			enforce: 'pre',
-			//! TODO: Fix Typescript Paths!
-		},
-		...VitePluginNode({
-			// Nodejs native Request adapter
-			// currently this plugin support 'express', 'nest', 'koa' and 'fastify' out of box,
-			// you can also pass a function if you are using other frameworks, see Custom Adapter section
-			adapter: 'express',
-
-			// tell the plugin where is your project entry
-			appPath: './src/server/dev.ts',
-
-			// Optional, default: 'viteNodeApp'
-			// the name of named export of you app from the appPath file
-			exportName: 'viteNodeApp',
-		}),
-		solid({ ssr: true }),
-	],
+	cacheDir: 'node_modules/.cache/vite',
+	assetsInclude: [/\/static\/.*$/],
+	plugins: [tsconfigPaths(), solid({ ssr: true }), Servers()],
 	build: {
 		manifest: true,
 		ssrManifest: true,
+		sourcemap: true,
+		polyfillModulePreload: false,
+		assetsInlineLimit: 256,
+	},
+	server: {
+		middlewareMode: 'ssr',
 	},
 	resolve: {
 		preserveSymlinks: true, // Avoid errors with pnpm linking
 	},
 	ssr: {
+		external: [...builtinModules],
 		noExternal: [
-			'vite',
 			// Vite attempts to load this as a Commonjs dependency
 			'solid-meta',
 		],
 	},
-	cacheDir: 'node_modules/.cache/vite',
-	assetsInclude: [/\/static\/.*$/],
 });

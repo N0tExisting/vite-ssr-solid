@@ -1,7 +1,9 @@
 // @ts-check
 const fs = require('fs');
 const path = require('path');
-const faker = require('faker');
+/** @type {import('@faker-js/faker').Faker} */
+// @ts-expect-error
+const faker = require('@faker-js/faker');
 
 const USERS = 200;
 const users = {};
@@ -14,6 +16,7 @@ for (let i = 0; i < USERS; i++) {
 	const lastName = faker.name.lastName(gender === 'male' ? 0 : 1);
 	const bioLength = faker.datatype.number({ min: 15, max: 255 });
 
+	/** @type {import('./src/typings/user').User} */
 	const user = {
 		person: {
 			firstName: firstName,
@@ -21,8 +24,16 @@ for (let i = 0; i < USERS; i++) {
 			gender: gender,
 		},
 		user: {
-			email: faker.unique(faker.internet.email, [firstName, lastName]),
-			username: faker.unique(faker.internet.userName, [firstName, lastName]),
+			// @ts-expect-error
+			email: faker.unique(
+				/** @returns {import('./src/typings/user').Email} */ // @ts-expect-error
+				() => faker.internet.email(firstName, lastName),
+				[],
+			),
+			username: faker.unique(
+				() => faker.internet.userName(firstName, lastName),
+				[],
+			),
 			password: faker.internet.password(undefined, faker.datatype.boolean()),
 			bio: bioLength === 15 ? false : faker.lorem.words(bioLength),
 		},
@@ -34,7 +45,7 @@ for (let i = 0; i < USERS; i++) {
 		},
 	};
 
-	users[faker.unique(faker.datatype.uuid)] = user;
+	users[faker.unique(faker.datatype.uuid, [])] = user;
 }
 
 fs.writeFileSync(

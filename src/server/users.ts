@@ -1,4 +1,4 @@
-import faker from 'faker';
+import faker from '@faker-js/faker';
 import type { Users, User, Email } from '../typings/user';
 
 const USERS = 200;
@@ -19,8 +19,14 @@ for (let i = 0; i < USERS; i++) {
 			gender: gender,
 		},
 		user: {
-			email: faker.unique(faker.internet.email, [firstName, lastName]) as Email,
-			username: faker.unique(faker.internet.userName, [firstName, lastName]),
+			email: faker.unique(
+				() => faker.internet.email(firstName, lastName),
+				[],
+			) as Email,
+			username: faker.unique(
+				() => faker.internet.userName(firstName, lastName),
+				[],
+			),
 			password: faker.internet.password(undefined, faker.datatype.boolean()),
 			bio: bioLength === 15 ? false : faker.lorem.words(bioLength),
 		},
@@ -32,7 +38,7 @@ for (let i = 0; i < USERS; i++) {
 		},
 	};
 
-	users[faker.unique(faker.datatype.uuid)] = user;
+	users[faker.unique(faker.datatype.uuid, [])] = user;
 }
 
 // TODO: This Function isn't good, but it works.

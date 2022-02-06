@@ -12,7 +12,7 @@ export interface TagDescription {
 export interface ServerProps {
 	tags: TagDescription[];
 	url: string;
-	out?: object | RouterOutput | {};
+	out?: RouterOutput;
 	data?: RouteDataFunc;
 }
 
@@ -28,7 +28,7 @@ const Server: Component<ServerProps> = (props) => {
 
 export function render(url: string) {
 	let tags: TagDescription[] = [];
-	const out = {};
+	const out = {} as RouterOutput;
 	const body = renderToString(() => <Server tags={tags} url={url} out={out} />);
 	const hydration = generateHydrationScript();
 	const head = renderTags(tags);

@@ -11,6 +11,7 @@ const UserPreview = (props: UserPreviewProps): JSXElement => {
 	return (
 		<Link href={`/users/${props.uid}`}>
 			<h3>{props.user.user.username}</h3>
+			{props.user.user.bio && <p>{props.user.user.bio}</p>}
 		</Link>
 	);
 };
