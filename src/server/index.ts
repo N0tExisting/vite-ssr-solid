@@ -1,11 +1,10 @@
 // file deepcode ignore Utf8Literal: Web uses utf-8
-import { readFileSync, existsSync } from 'fs';
 import * as path from 'path';
 import express from 'express';
 import assert from 'assert';
 import { render } from './renderer';
 import indexHtml from '../../index.html?raw';
-import { createServer as createViteServer } from 'vite';
+//import { createServer as createViteServer } from 'vite';
 import compression from 'compression';
 import serveStatic from 'serve-static';
 //import users from '../../static/users.json';
@@ -22,7 +21,9 @@ export default async function createServer(
 
 	const app = express().disable('x-powered-by');
 
-	const vite = await createViteServer({
+	const vite = await (
+		await import('vite')
+	).createServer({
 		root,
 		logLevel: isTest ? 'error' : 'info',
 		server: {
@@ -79,8 +80,10 @@ export default async function createServer(
 			//console.log('Renderer:\n', render)
 			assert(typeof render === 'function', '"render" is not a function!');
 
+			// deepcode ignore OR: User Needs to take care of this
 			const result = render(url);
 
+			// deepcode ignore FormatString: Important Debug Info
 			console.log(`Request '${req.originalUrl}' out:\n`, result.ctx);
 			assert(
 				result.ctx.matches,

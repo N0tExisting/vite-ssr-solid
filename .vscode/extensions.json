@@ -1,6 +1,5 @@
 {
 	"recommendations": [
-		"bernardogualberto.solidjs",
 		"esbenp.prettier-vscode",
 		"streetsidesoftware.code-spell-checker",
 		"aaron-bond.better-comments",
@@ -11,7 +10,6 @@
 		"editorconfig.editorconfig",
 		"usernamehw.errorlens",
 		"henry-li.vscode-import-formatter",
-		"ldez.ignore-files",
 		"bierner.markdown-checkbox",
 		"bierner.markdown-emoji",
 		"davidanson.vscode-markdownlint",

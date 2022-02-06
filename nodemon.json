@@ -7,6 +7,8 @@
 	"watch": [
 		"./server.js",
 		"./pnpm-lock.yml",
+		"./pnpm-lock.yaml",
+		"./vite.config.*",
 		"./nodemon.json"
 	],
 	"env": {
