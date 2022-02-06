@@ -19,6 +19,7 @@ specifiers:
   tslib: ^2.3.1
   typescript: ^4.5.5
   vite: ^2.7.13
+  vite-plugin-pages-solid: ^0.0.2
   vite-plugin-solid: ^2.2.5
   vite-tsconfig-paths: ^3.3.17
 
@@ -43,6 +44,7 @@ devDependencies:
   sass: 1.49.7
   typescript: 4.5.5
   vite: 2.7.13_sass@1.49.7
+  vite-plugin-pages-solid: 0.0.2_15069931eafcbe2459c8932ab05e9bc6
   vite-plugin-solid: 2.2.5_sass@1.49.7
   vite-tsconfig-paths: 3.3.17_vite@2.7.13
 
@@ -720,6 +722,18 @@ packages:
     dependencies:
       ms: 2.0.0
     dev: false
+
+  /debug/4.3.2:
+    resolution: {integrity: sha512-mOp8wKcvj7XxC78zLgw/ZA+6TSgkoE2C/ienthhRD298T7UNwAg9diBpLRxC0mOezLl4B0xV7M0cCO6P/O0Xhw==}
+    engines: {node: '>=6.0'}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+    dependencies:
+      ms: 2.1.2
+    dev: true
 
   /debug/4.3.3:
     resolution: {integrity: sha512-/zxw5+vh1Tfv+4Qn7a5nsbcJKPaSvCDhojn6FEl9vupwK2VCSDtEiEtqr8DFtzYFOdz63LBkxec7DYuc2jon6Q==}
@@ -1625,6 +1639,19 @@ packages:
     resolution: {integrity: sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=}
     engines: {node: '>= 0.8'}
     dev: false
+
+  /vite-plugin-pages-solid/0.0.2_15069931eafcbe2459c8932ab05e9bc6:
+    resolution: {integrity: sha512-NMSsD9ufIO0pehIzZa0gMgAT2LZBThqviFUIUoeLKBORhpNB7NqdixcnDOJNhbPj3lU9UMZm2t4hLDAxss/3Pg==}
+    peerDependencies:
+      solid-app-router: '>=0'
+      vite: '>=2'
+    dependencies:
+      debug: 4.3.2
+      solid-app-router: 0.2.1_solid-js@1.3.5
+      vite: 2.7.13_sass@1.49.7
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
 
   /vite-plugin-solid/2.2.5_sass@1.49.7:
     resolution: {integrity: sha512-SJkXdVnrPnhAWzs8Vi/+9oViUfx6TiQo8y1FFlDiyUdZR4nxTyGmRzz4xx+CC75GJL3hgDWac/zYA6sYq8SQAg==}

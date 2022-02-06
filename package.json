@@ -40,6 +40,7 @@
 		"sass": "^1.49.7",
 		"typescript": "^4.5.5",
 		"vite": "^2.7.13",
+		"vite-plugin-pages-solid": "^0.0.2",
 		"vite-plugin-solid": "^2.2.5",
 		"vite-tsconfig-paths": "^3.3.17"
 	}

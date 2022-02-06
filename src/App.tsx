@@ -1,10 +1,9 @@
-import { useRoutes } from 'solid-app-router';
 import { Meta, Style } from 'solid-meta';
-import routes from './routes';
+import useRoutes from './routes';
 import './styles/global.scss';
 
 export const App = () => {
-	const Routes = useRoutes(routes);
+	const Routes = useRoutes();
 	return (
 		<>
 			<Style>{

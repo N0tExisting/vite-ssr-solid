@@ -8,6 +8,7 @@
 		"fastify",
 		"jiti",
 		"middlewares",
+		"noindex",
 		"pnpm",
 		"shortcircuit",
 		"Vite"

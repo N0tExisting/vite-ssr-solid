@@ -1,6 +1,6 @@
 import { Meta } from 'solid-meta';
 import { Link as A } from 'solid-app-router';
-import styles from './styles/404.module.scss'
+import styles from './styles/404.module.scss';
 
 export default function NotFound() {
 	// FIXME: This needs to return a 404.
@@ -16,9 +16,7 @@ export default function NotFound() {
 					Did you type the URL wrong?
 					<br />
 				</p>
-				<A
-					href='/'
-					class={styles['textCenter']}>
+				<A href='/' class={styles['textCenter']}>
 					Homepage
 				</A>
 			</section>
